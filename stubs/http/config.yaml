@@ -1,0 +1,92 @@
+- request:
+    url: /rwg/game-info
+    method: GET
+    headers:
+      server-id: 1
+  response:
+    - status: 200
+      latency: 100
+      headers:
+        content-type: application/json
+        server: stubbedServer/4.2
+      body: >
+        {
+          "name": "A closed game",
+          "id": "a-closed-game",
+          "playersPerMatch": 2,
+          "playersInQueue": 0,
+          "description": "This is a test description",
+          "open": false
+        }
+- request:
+    url: /rwg/game-info
+    method: GET
+    headers:
+      server-id: 2
+  response:
+    - status: 200
+      latency: 100
+      headers:
+        content-type: application/json
+        server: stubbedServer/4.2
+      body: >
+        {
+          "name": "An unauthenticated game",
+          "id": "un-auth-game",
+          "playersPerMatch": 2,
+          "playersInQueue": 3,
+          "description": "This is a test description",
+          "open": true,
+          "authenticationRequired": false
+        }
+# default
+- request:
+    url: /rwg/game-info
+    method: GET
+  response:
+    - status: 200
+      latency: 100
+      headers:
+        content-type: application/json
+        server: stubbedServer/4.2
+      body: >
+        {
+          "name": "Online Racing",
+          "id": "online-racing",
+          "playersPerMatch": 2,
+          "playersInQueue": 3,
+          "description": "This is a test description",
+          "open": true,
+          "authenticationRequired": true
+        }
+- request:
+    url: /rwg/get-current-required-players
+    method: GET
+    headers:
+      server-id: 2
+  response:
+    - status: 200
+      latency: 100
+      headers:
+        content-type: application/json
+        server: stubbedServer/4.2
+      body: >
+        {
+          "desiredPlayers": 2,
+          "minimum": 2
+        }
+# default
+- request:
+    url: /rwg/get-current-required-players
+    method: GET
+  response:
+    - status: 200
+      latency: 100
+      headers:
+        content-type: application/json
+        server: stubbedServer/4.2
+      body: >
+        {
+          "desiredPlayers": 2
+          "minimum": 2
+        }
